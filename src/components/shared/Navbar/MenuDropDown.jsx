@@ -20,7 +20,7 @@ const MenuDropdown = () => {
         becomeHost(email)
             .then(data => {
                 toast.success("You are host now.Add room!")
-
+                setRole("host")
             })
         closeModal()
     }
@@ -29,9 +29,9 @@ const MenuDropdown = () => {
     }
     return (
         <div className='relative'>
-            <div className='flex flex-row items-center gap-3 '>
-                {!role && (<div className='hidden md:block text-sm font-semibold py-3 px-8 rounded-ful transition cursor-pointer'>
-                    <button onClick={() => setModal(true)} className='py-3 px-4' disabled={!user}> AirCNC your home
+            <div className='flex flex-row items-center gap-3 px-8'>
+                {!role && (<div className='hidden md:block text-sm font-semibold py-3 px-8 rounded-ful transition '>
+                    <button onClick={() => setModal(true)} className='py-3 px-4 cursor-pointer' disabled={!user}> AirCNC your home
                     </button>
                 </div>)}
                 <div

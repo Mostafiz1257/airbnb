@@ -31,11 +31,14 @@ const RoomReservation = ({ roomData }) => {
         value([...value])
     }
     const handleModal = () => {
+        console.log("open this");
         BookRoom(booking)
-        .then(data => {
-        console.log(data);
-        })
-        .catch(err=>console.log(err))
+            .then(data => {
+                console.log(data);
+                closeModal()
+                toast.success("Your room booked successfully.")
+            })
+            .catch(err => console.log(err))
     }
 
     const closeModal = () => {
@@ -59,7 +62,7 @@ const RoomReservation = ({ roomData }) => {
                 <div>Total</div>
                 <div>$ {totalPrice}</div>
             </div>
-            <BookingModal handleModal={handleModal} closeModal={closeModal} isOpen={isOpen} bookingInfo={booking}></BookingModal>
+            <BookingModal modalHandler={handleModal} closeModal={closeModal} isOpen={isOpen} bookingInfo={booking}></BookingModal>
         </div>
     );
 };
