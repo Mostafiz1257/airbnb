@@ -5,7 +5,7 @@ import DatePicker from "../Calender/DatePicker";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import BookingModal from "../../../../components/Modal/BookingModal";
 import { formatDistance } from "date-fns";
-import { BookRoom } from "../../../../api/booking";
+import { BookRoom, updateStatus } from "../../../../api/booking";
 import toast from "react-hot-toast";
 
 const RoomReservation = ({ roomData }) => {
@@ -25,18 +25,23 @@ const RoomReservation = ({ roomData }) => {
         title: roomData.title,
         to: value.endDate,
         from: value.startDate,
+        roomID: roomData._id
     })
 
     const handleDate = (range) => {
         value([...value])
     }
     const handleModal = () => {
-        console.log("open this");
+       
         BookRoom(booking)
-            .then(data => {
-                console.log(data);
-                closeModal()
-                toast.success("Your room booked successfully.")
+            .then(() => {
+                updateStatus(roomData._id, true)
+                    .then(data => {
+                        toast.success("Booked successfully")
+                        closeModal();
+                    })
+                    .catch(err => console.log(err))
+
             })
             .catch(err => console.log(err))
     }
@@ -55,7 +60,7 @@ const RoomReservation = ({ roomData }) => {
             <DatePicker handleDate={handleDate} value={value}></DatePicker>
             <hr />
             <div className="p-4">
-                <Button disabled={roomData.host.email === user.email} onClick={() => setIsOpen(true)} label={"Reserve"}></Button>
+                <Button disabled={roomData.host.email === user.email || roomData.booked} onClick={() => setIsOpen(true)} label={"Reserve"}></Button>
             </div>
             <hr />
             <div className="   p-4 flex flex-row items-center justify-between font-semibold text-lg">
