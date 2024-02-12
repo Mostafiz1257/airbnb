@@ -1,15 +1,19 @@
 import React, { useContext, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../providers/AuthProvider'
-import Logo from '../Shared/Navbar/Logo'
+// import Logo from '../Shared/Navbar/Logo'
+
 import { GrLogout } from 'react-icons/gr'
 import { FcSettings } from 'react-icons/fc'
 import { AiOutlineBars } from 'react-icons/ai'
 import { BsFillHouseAddFill } from 'react-icons/bs'
+import GuestMenu from './GuestMenu'
+import HostMenu from './HostMenu'
+import Logo from '../shared/Navbar/Logo'
 const Sidebar = () => {
   const navigate = useNavigate()
   const [toggle, setToggle] = useState(false)
-  const { user, logOut } = useContext(AuthContext)
+  const { user, logOut,role } = useContext(AuthContext)
   const [isActive, setActive] = useState('false')
   const toggleHandler = event => {
     setToggle(event.target.checked)
@@ -42,9 +46,8 @@ const Sidebar = () => {
       </div>
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
-          isActive && '-translate-x-full'
-        }  md:translate-x-0  transition duration-200 ease-in-out`}
+        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${isActive && '-translate-x-full'
+          }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           {/* Branding & Profile Info */}
@@ -77,7 +80,7 @@ const Sidebar = () => {
           {/* Nav Items */}
           <div className='flex flex-col justify-between flex-1 mt-6'>
             <nav>
-              <>
+           {role && role==='host' ?  <>
                 <label
                   htmlFor='Toggle3'
                   className='inline-flex w-full justify-center items-center px-2 rounded-md cursor-pointer text-gray-800'
@@ -95,20 +98,8 @@ const Sidebar = () => {
                     Host
                   </span>
                 </label>
-                {/* Menu Links */}
-                <NavLink
-                  to='add-room'
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
-                      isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
-                    }`
-                  }
-                >
-                  <BsFillHouseAddFill className='w-5 h-5' />
-
-                  <span className='mx-4 font-medium'>Add Room</span>
-                </NavLink>
-              </>
+               {toggle ? <HostMenu></HostMenu> : <GuestMenu></GuestMenu>}
+              </>: <GuestMenu></GuestMenu>}
             </nav>
           </div>
         </div>
@@ -118,8 +109,7 @@ const Sidebar = () => {
           <NavLink
             to='/dashboard/profile'
             className={({ isActive }) =>
-              `flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
-                isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
+              `flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
               }`
             }
           >

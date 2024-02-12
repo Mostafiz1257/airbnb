@@ -7,10 +7,12 @@ import BookingModal from "../../../../components/Modal/BookingModal";
 import { formatDistance } from "date-fns";
 import { BookRoom, updateStatus } from "../../../../api/booking";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const RoomReservation = ({ roomData }) => {
     const { user, role } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
+    const navigate = useNavigate();
     const totalPrice = parseFloat(formatDistance(new Date(roomData.to), new Date(roomData.from)).split(' ')[0]) * roomData.price
 
     const [value, setValue] = useState({
@@ -25,7 +27,8 @@ const RoomReservation = ({ roomData }) => {
         title: roomData.title,
         to: value.endDate,
         from: value.startDate,
-        roomID: roomData._id
+        roomID: roomData._id,
+        image:roomData.image
     })
 
     const handleDate = (range) => {
@@ -36,8 +39,9 @@ const RoomReservation = ({ roomData }) => {
         BookRoom(booking)
             .then(() => {
                 updateStatus(roomData._id, true)
-                    .then(data => {
+                    .then(() => {
                         toast.success("Booked successfully")
+                        navigate('/dashboard/my-bookings')
                         closeModal();
                     })
                     .catch(err => console.log(err))

@@ -33,7 +33,7 @@ export const updateStatus = async (id, status) => {
             headers: {
                 "content-type": "application/json"
             },
-            body: JSON.stringify({status})
+            body: JSON.stringify({ status })
         }
         )
 
@@ -49,4 +49,34 @@ export const updateStatus = async (id, status) => {
         console.log("Error:", error);
     }
 
+}
+
+//get bookings by individual email
+export const GetBookings = async (email) => {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/bookings?email=${email}`,)
+    const bookings = await response.json()
+    return bookings
+}
+
+export const deleteBooking=async (id)=>{
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/bookings/${id}`, {
+            method: "DELETE",
+            headers: {
+                "content-type": "application/json"
+            },
+        }
+        )
+
+        if (!response.ok) {
+            // Handle non-successful response
+            throw new Error('Failed to delete data');
+        }
+        const data = await response.json()
+        return data;
+    }
+
+    catch (error) {
+        console.log("Error:", error);
+    }
 }
