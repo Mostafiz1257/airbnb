@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { deleteBooking, updateStatus } from '../../api/booking'
 import toast from 'react-hot-toast'
 
-const TableRow = ({ booking, fetchRoom }) => {
+const TableRow = ({ booking, fetchBooking }) => {
   let [isOpen, setIsOpen] = useState(false)
 
   const closeModal = () => {
@@ -17,10 +17,11 @@ const TableRow = ({ booking, fetchRoom }) => {
         console.log(data);
         updateStatus(booking.roomID, false)
           .then(() => {
-            fetchRoom()
+            fetchBooking()
             toast.success("Booking canceled")
           })
       })
+      closeModal()
   }
 
   return (

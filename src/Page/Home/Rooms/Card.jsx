@@ -23,6 +23,7 @@ const Card = ({room}) => {
               w-full 
               group-hover:scale-110 
               transition
+              
             '
             src={image}
             alt='Room'

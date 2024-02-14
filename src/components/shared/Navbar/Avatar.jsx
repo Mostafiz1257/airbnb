@@ -6,7 +6,7 @@ const Avatar = () => {
   const {user} = useContext(AuthContext)
     return (
     
-      <img className=' rounded-full' src={user && user.photoURL ? user.photoURL : avatarImg} alt="profile" width={'30'} height={"30"} />
+      <img className=' rounded-full' src={user && user.photoURL ? user.photoURL : avatarImg} alt="profile" width={'30'} height={"30"}  referrerPolicy='no-referrer'/>
     );
 };
 

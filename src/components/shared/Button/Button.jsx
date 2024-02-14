@@ -9,6 +9,7 @@ const Button = ({ label, onClick, disabled, outline, small, icon: Icon }) => {
           disabled:cursor-not-allowed
           rounded-lg
           hover:opacity-80
+          px-4
           transition
           w-full
           ${outline ? 'bg-white' : 'bg-rose-500'}

@@ -12,6 +12,7 @@ import AddRoom from "../Page/Dashboard/AddRoom";
 import { getSingleRoom } from "../api/addRoom";
 import MyBookings from "../Page/Dashboard/MyBookings";
 import MyListings from "../Page/Dashboard/MyListings";
+import ManageBooking from "../Page/Dashboard/ManageBooking";
 
 export const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/my-listings',
                 element:<MyListings></MyListings>
+            },
+            {
+                path:'/dashboard/host-bookings',
+                element:<ManageBooking></ManageBooking>
             }
         ]
     }

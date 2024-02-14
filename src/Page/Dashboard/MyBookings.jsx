@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { GetBookings } from "../../api/booking"
 import { AuthContext } from "../../providers/AuthProvider"
 import TableRow from "../../components/Dashboard/TableRow"
+import EmptyState from "../../components/shared/EmptyState"
 
 
 const MyBookings = () => {
@@ -21,6 +22,8 @@ const MyBookings = () => {
     },[user])
 
     return (
+     <>
+     {myBookings && Array.isArray(myBookings) && myBookings.length > 0 ? <>
       <div className='container mx-auto px-4 sm:px-8'>
         <div className='py-8'>
           <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
@@ -72,6 +75,10 @@ const MyBookings = () => {
           </div>
         </div>
       </div>
+     </> :<>
+     <EmptyState message={"You don't book any room !"} address={"/"} label={"Book Now"}></EmptyState>
+     </>}
+     </>
     )
   }
   
