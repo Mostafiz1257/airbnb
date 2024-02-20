@@ -75,7 +75,7 @@ const ManageBooking = () => {
           </div>
         </div>
       </div>
-    </div> : <EmptyState message={"You don't post any room !"} address={"/dashboard/add-room"} label={"Post Room"}></EmptyState>
+    </div> : <EmptyState message={"Nobody booked your any room !"} address={"/dashboard/add-room"} label={"Post Room"}></EmptyState>
      }
      </>
     )

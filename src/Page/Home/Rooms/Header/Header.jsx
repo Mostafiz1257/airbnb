@@ -2,7 +2,6 @@ import React from 'react';
 import Heading from '../../../../components/shared/Heading/Heading';
 
 const Header = ({roomData}) => {
-    console.log(roomData);
     return (
         <>
            <Heading title={roomData?.title} subtitle={roomData.location}></Heading> 

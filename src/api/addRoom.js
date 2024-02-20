@@ -26,11 +26,15 @@ export const getSingleRoom = async (_id) => {
     return data;
 }
 
-export const postRoomByEmail = async (email) => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/rooms/${email}`)
-    const data = await response.json()
-    return data;
-}
+// export const postRoomByEmail = async (email) => {
+//     const response = await fetch(`${import.meta.env.VITE_API_URL}/rooms/${email}`,{
+//         headers:{
+//             authorization:`bearer ${localStorage.getItem('access-token')}`
+//         }
+//     })
+//     const data = await response.json()
+//     return data;
+// }
 
 export const deleteRoom = async (id) => {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/rooms/${id}`, {
